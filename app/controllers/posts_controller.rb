@@ -2,7 +2,11 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show]
 
   def index
-    @posts = Post.all
+    if params[:category_id]
+      @posts = Post.where(category_id: params[:category_id])
+    else
+      @posts = Post.all
+    end
   end
 
   def show
